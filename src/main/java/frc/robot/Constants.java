@@ -13,5 +13,10 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    
+    public static final int FrontRightId = 0b00;
+    public static final int FrontLeftId = 0b01;
+    public static final int BackRightId = 0b10;
+    public static final int BackLeftId = 0b11;
+
+
 }
