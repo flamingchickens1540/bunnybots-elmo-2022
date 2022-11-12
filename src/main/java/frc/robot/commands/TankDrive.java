@@ -9,22 +9,24 @@ public class TankDrive extends CommandBase {
 
     DriveTrain driveTrain;
 
+    double deadlock = .1;
+
     public TankDrive(DriveTrain driveTrain) {
         addRequirements(driveTrain);
         this.driveTrain = driveTrain;
     }
 
     @Override
-    public void initialize() {
-        driveTrain.arrète();
-    }
-
-    @Override
     public void end(boolean interrupted) {
-        driveTrain.arrète();
+        driveTrain.estoppel();
     }
 
     public void execute() {
-        driveTrain.setPercent(controller.getRightY(), controller.getLeftY());
+        double rightPercent =  controller.getRightY();
+        double leftPercent =  controller.getLeftY();
+        driveTrain.setPercent(
+            Math.abs(rightPercent) > deadlock ? rightPercent : 0, 
+            Math.abs(leftPercent) > deadlock ? leftPercent : 0
+        );
     }
 }
