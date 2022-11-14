@@ -5,14 +5,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class TankDrive extends CommandBase {
-    XboxController controller = new XboxController(0);
+    XboxController controller;
 
     DriveTrain driveTrain;
 
     double deadlock = .1;
 
-    public TankDrive(DriveTrain driveTrain) {
+    public TankDrive(DriveTrain driveTrain, XboxController controller) {
         addRequirements(driveTrain);
+        this.controller = controller;
         this.driveTrain = driveTrain;
     }
 
