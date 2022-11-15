@@ -1,11 +1,10 @@
-package team1540.elmo.subsystems;
+package org.team1540.elmo.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import team1540.elmo.Constants;
+import org.team1540.elmo.Constants;
 
 public class Arm extends SubsystemBase {
     private Solenoid suction = new Solenoid(Constants.SUCTION_TYPE,Constants.SUCTION_CHANNEL);
