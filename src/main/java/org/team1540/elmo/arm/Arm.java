@@ -1,4 +1,4 @@
-package org.team1540.elmo.subsystems;
+package org.team1540.elmo.arm;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
