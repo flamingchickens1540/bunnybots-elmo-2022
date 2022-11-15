@@ -25,6 +25,6 @@ public class Arm extends SubsystemBase {
 
     @Override
     public void simulationPeriodic() {
-        SmartDashboard.putString("thing1/hey","sup");
+
     }
 }
