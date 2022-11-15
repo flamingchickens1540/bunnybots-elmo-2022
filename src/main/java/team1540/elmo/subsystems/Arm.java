@@ -11,8 +11,8 @@ public class Arm extends SubsystemBase {
     private Solenoid suction = new Solenoid(Constants.SUCTION_TYPE,Constants.SUCTION_CHANNEL);
     private DoubleSolenoid arm = new DoubleSolenoid(Constants.ARM_TYPE,Constants.ARM_FORWARD_CHANNEL,Constants.ARM_REVERSE_CHANNEL);
 
-    public void succ(boolean doBeSuccin) {
-        suction.set(doBeSuccin);
+    public void setSuction(boolean active) {
+        suction.set(active);
     }
 
     public void setArm(boolean extended) {
