@@ -21,7 +21,7 @@ public class DriveTrain extends SubsystemBase {
         frontLeft.setNeutralMode(NeutralMode.Brake);
     }
 
-    public void estoppel() {
+    public void stop() {
         setPercent(0, 0);
     }
 

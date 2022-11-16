@@ -19,7 +19,7 @@ public class TankDrive extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        driveTrain.estoppel();
+        driveTrain.stop();
     }
 
     public void execute() {
