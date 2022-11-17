@@ -24,11 +24,16 @@ public final class Constants {
     public static final int RIGHT_BACK_MOTOR_CAN_ID = 3;
 
     // SOLENOIDS
-    public static final int ARM_FORWARD_CHANNEL = 0;
-    public static final int ARM_REVERSE_CHANNEL = 1;
-    public static final PneumaticsModuleType ARM_TYPE = PneumaticsModuleType.CTREPCM;
-    public static final int SUCTION_CHANNEL = 2;
-    public static final PneumaticsModuleType SUCTION_TYPE = PneumaticsModuleType.CTREPCM;
+    // Arm
+    public static final PneumaticsModuleType PNEUMATICS_TYPE = PneumaticsModuleType.CTREPCM;
+    public static final int ARM_FORWARD_CHANNEL = 3;
+    public static final int ARM_REVERSE_CHANNEL = 1; // ?????
+    public static final int SUCTION_UPPER_CHANNEL = 6;
+    // BunnySucc :[]
+    public static final int SUCTION_INNER_CHANNEL = 4;
+    public static final int SUCTION_OUTER_CHANNEL = 5;
+    public static final int DEPLOY_INNER_CHANNEL = 1;
+    public static final int DEPLOY_OUTER_CHANNEL = 2;
 
     // COMPRESSOR
     public static final int COMPRESSOR = 0;
