@@ -170,3 +170,6 @@ controls*.pdf
 
 # Simulator
 simgui*.json
+
+# Intellij run configs
+.run
