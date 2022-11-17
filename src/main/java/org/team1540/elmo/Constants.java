@@ -16,13 +16,6 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
-    // DRIVETRAIN CAN IDS
-    public static final int LEFT_FRONT_MOTOR_CAN_ID = 0;
-    public static final int LEFT_BACK_MOTOR_CAN_ID = 1;
-    public static final int RIGHT_FRONT_MOTOR_CAN_ID = 2;
-    public static final int RIGHT_BACK_MOTOR_CAN_ID = 3;
-
     // SOLENOIDS
     // Arm
     public static final PneumaticsModuleType PNEUMATICS_TYPE = PneumaticsModuleType.CTREPCM;
