@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.team1540.elmo.Constants;
 
 public class Arm extends SubsystemBase {
-    private Solenoid suction = new Solenoid(Constants.SUCTION_TYPE,Constants.SUCTION_CHANNEL);
-    private DoubleSolenoid arm = new DoubleSolenoid(Constants.ARM_TYPE,Constants.ARM_FORWARD_CHANNEL,Constants.ARM_REVERSE_CHANNEL);
+    private Solenoid suction = new Solenoid(Constants.PNEUMATICS_TYPE,Constants.SUCTION_UPPER_CHANNEL);
+    private DoubleSolenoid arm = new DoubleSolenoid(Constants.PNEUMATICS_TYPE,Constants.ARM_FORWARD_CHANNEL,Constants.ARM_REVERSE_CHANNEL);
 
     public void setSuction(boolean active) {
         suction.set(active);
