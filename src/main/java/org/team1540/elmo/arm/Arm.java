@@ -8,14 +8,14 @@ import org.team1540.elmo.Constants;
 
 public class Arm extends SubsystemBase {
     private Solenoid suction = new Solenoid(Constants.PNEUMATICS_TYPE,Constants.SUCTION_UPPER_CHANNEL);
-    private DoubleSolenoid arm = new DoubleSolenoid(Constants.PNEUMATICS_TYPE,Constants.ARM_FORWARD_CHANNEL,Constants.ARM_REVERSE_CHANNEL);
-
+    private Solenoid arm = new Solenoid(Constants.PNEUMATICS_TYPE,Constants.ARM_FORWARD_CHANNEL);
     public void setSuction(boolean active) {
         suction.set(active);
     }
 
     public void setArm(boolean extended) {
-        arm.set(extended ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
+//        arm.set(extended ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
+        arm.set(extended);
     }
 
     @Override

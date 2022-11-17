@@ -27,7 +27,7 @@ public final class Constants {
     // Arm
     public static final PneumaticsModuleType PNEUMATICS_TYPE = PneumaticsModuleType.CTREPCM;
     public static final int ARM_FORWARD_CHANNEL = 3;
-    public static final int ARM_REVERSE_CHANNEL = 1; // ?????
+//    public static final int ARM_REVERSE_CHANNEL = 1; // ?????
     public static final int SUCTION_UPPER_CHANNEL = 6;
     // BunnySucc :[]
     public static final int SUCTION_INNER_CHANNEL = 4;
