@@ -8,7 +8,7 @@ package org.team1540.elmo;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import org.team1540.elmo.arm.Arm;
+import org.team1540.elmo.ejectors.BunnyEjectors;
 
 
 /**
@@ -20,8 +20,10 @@ import org.team1540.elmo.arm.Arm;
 public class RobotContainer
 {
     // The robot's subsystems and commands are defined here...
-    private final Arm arm = new Arm();
-    
+    private final BunnyEjectors.OuterEjector outerEjector = new BunnyEjectors.OuterEjector();
+    private final BunnyEjectors.InnerEjector innerEjector = new BunnyEjectors.InnerEjector();
+    private final BunnyEjectors.UpperEjector upperEjector = new BunnyEjectors.UpperEjector();
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer()
     {
