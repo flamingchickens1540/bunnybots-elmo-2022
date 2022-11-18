@@ -8,7 +8,9 @@ package org.team1540.elmo;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import org.team1540.elmo.ejectors.BunnyEjectors;
+import org.team1540.elmo.ejectors.EjectLower;
 
 
 /**
@@ -23,6 +25,8 @@ public class RobotContainer
     private final BunnyEjectors.OuterEjector outerEjector = new BunnyEjectors.OuterEjector();
     private final BunnyEjectors.InnerEjector innerEjector = new BunnyEjectors.InnerEjector();
     private final BunnyEjectors.UpperEjector upperEjector = new BunnyEjectors.UpperEjector();
+
+    private XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer()
@@ -40,7 +44,9 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-
+        new JoystickButton(driver,XboxController.Button.kA.value).whenPressed(
+                new EjectLower(innerEjector,outerEjector)
+        );
 
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html

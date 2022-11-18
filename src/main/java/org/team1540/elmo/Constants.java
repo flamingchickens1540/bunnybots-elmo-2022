@@ -16,6 +16,10 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    // CONTROL
+    public static final int DRIVER_CONTROLLER_PORT = 0;
+    public static final int COPILOT_CONTROLLER_PORT = 1;
+
     // SOLENOIDS
     // Arm
     public static final PneumaticsModuleType PNEUMATICS_TYPE = PneumaticsModuleType.CTREPCM;
