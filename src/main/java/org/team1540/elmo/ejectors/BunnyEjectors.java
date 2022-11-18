@@ -13,7 +13,7 @@ public class BunnyEjectors extends SubsystemBase {
     public BunnyEjectors(Solenoid suction,Solenoid eject) {
         this.suction = suction;
         this.eject = eject;
-        SmartDashboard.putNumber("LowerSuction/ejectSeconds",1);
+        SmartDashboard.putNumber(getName() + "/ejectPulseSecs",1);
     }
 
     public void setSuction(boolean sucking) {
@@ -23,7 +23,7 @@ public class BunnyEjectors extends SubsystemBase {
         eject.set(extended);
     }
     public void eject() {
-        eject.setPulseDuration(SmartDashboard.getNumber("Eject/ejectSeconds",1));
+        eject.setPulseDuration(SmartDashboard.getNumber(getName() + "/ejectPulseSecs",1));
         eject.startPulse();
     }
 

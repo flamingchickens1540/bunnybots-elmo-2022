@@ -3,6 +3,7 @@ package org.team1540.elmo.ejectors;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import org.team1540.elmo.utils.WaitDashboardVarCommand;
 
 public class EjectOuter extends SequentialCommandGroup {
 
@@ -14,7 +15,7 @@ public class EjectOuter extends SequentialCommandGroup {
 
         addCommands(
                 new InstantCommand(outerEjector::eject),
-                new WaitCommand(0.15), // wait for outer to start moving. // TODO: Test without waiting
+                new WaitDashboardVarCommand(outerEjector,"waitBeforeUnsuck",0.15), // wait for suction to fully unsucc. // TODO: Test without waiting
                 new InstantCommand(()->outerEjector.setSuction(false))
         );
     }
