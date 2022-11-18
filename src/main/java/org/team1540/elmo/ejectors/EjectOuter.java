@@ -15,7 +15,7 @@ public class EjectOuter extends SequentialCommandGroup {
 
         addCommands(
                 new InstantCommand(outerEjector::eject),
-                new WaitDashboardVarCommand(outerEjector,"waitBeforeUnsuck",0.15), // wait for suction to fully unsucc. // TODO: Test without waiting
+                new WaitDashboardVarCommand(outerEjector,"push",0.15), // wait for suction to fully unsucc. // TODO: Test without waiting
                 new InstantCommand(()->outerEjector.setSuction(false))
         );
     }
