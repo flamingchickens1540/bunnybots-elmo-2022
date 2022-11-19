@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import org.team1540.elmo.ejectors.BunnyEjectors;
+import org.team1540.elmo.ejectors.EjectInner;
 import org.team1540.elmo.ejectors.EjectLower;
+import org.team1540.elmo.ejectors.EjectOuter;
 
 
 /**
@@ -44,8 +46,16 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
+//        new JoystickButton(driver,XboxController.Button.kA.value).whenPressed(
+//                new EjectLower(innerEjector,outerEjector)
+//        );
+        // left side
+        new JoystickButton(driver,XboxController.Button.kX.value).whenPressed(
+                new EjectOuter(outerEjector)
+        );
+        // right side
         new JoystickButton(driver,XboxController.Button.kA.value).whenPressed(
-                new EjectLower(innerEjector,outerEjector)
+                new EjectInner(innerEjector)
         );
 
         // Add button to command mappings here.
