@@ -13,17 +13,17 @@ public class Ejectors extends SubsystemBase {
     public Ejectors(Solenoid suction, Solenoid eject) {
         this.suction = suction;
         this.eject = eject;
-        SmartDashboard.putNumber(getName() + "/ejectPulseSecs",1);
+        SmartDashboard.putNumber(getName() + "/extendSecs",1);
     }
 
     public void setSuction(boolean sucking) {
         suction.set(sucking);
     }
-    public void setEject(boolean extended) {
+    public void setExtended(boolean extended) {
         eject.set(extended);
     }
     public void extend() {
-        eject.setPulseDuration(SmartDashboard.getNumber(getName() + "/ejectPulseSecs",1));
+        eject.setPulseDuration(SmartDashboard.getNumber(getName() + "/extendSecs",1));
         eject.startPulse();
     }
 
