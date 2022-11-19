@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import org.team1540.elmo.subsystems.ejectors.EjectUpperCommand;
 import org.team1540.elmo.subsystems.ejectors.Ejectors;
 import org.team1540.elmo.subsystems.ejectors.EjectOuterCommand;
 import org.team1540.elmo.subsystems.ejectors.EjectInnerCommand;
@@ -55,6 +56,10 @@ public class RobotContainer
         // right side
         new JoystickButton(driver,XboxController.Button.kA.value).whenPressed(
                 new EjectOuterCommand(outerEjector)
+        );
+        // upper
+        new JoystickButton(driver,XboxController.Button.kY.value).whenPressed(
+                new EjectUpperCommand(upperEjector)
         );
 
         // Add button to command mappings here.
