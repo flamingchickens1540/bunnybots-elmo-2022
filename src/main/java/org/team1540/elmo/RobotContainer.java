@@ -9,10 +9,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import org.team1540.elmo.ejectors.BunnyEjectors;
-import org.team1540.elmo.ejectors.EjectInner;
-import org.team1540.elmo.ejectors.EjectLower;
-import org.team1540.elmo.ejectors.EjectOuter;
+import org.team1540.elmo.subsystems.ejectors.Ejectors;
+import org.team1540.elmo.subsystems.ejectors.EjectOuterCommand;
+import org.team1540.elmo.subsystems.ejectors.EjectInnerCommand;
 
 
 /**
@@ -24,9 +23,9 @@ import org.team1540.elmo.ejectors.EjectOuter;
 public class RobotContainer
 {
     // The robot's subsystems and commands are defined here...
-    private final BunnyEjectors.OuterEjector outerEjector = new BunnyEjectors.OuterEjector();
-    private final BunnyEjectors.InnerEjector innerEjector = new BunnyEjectors.InnerEjector();
-    private final BunnyEjectors.UpperEjector upperEjector = new BunnyEjectors.UpperEjector();
+    private final Ejectors.OuterEjector outerEjector = new Ejectors.OuterEjector();
+    private final Ejectors.InnerEjector innerEjector = new Ejectors.InnerEjector();
+    private final Ejectors.UpperEjector upperEjector = new Ejectors.UpperEjector();
 
     private XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
 
@@ -51,11 +50,11 @@ public class RobotContainer
 //        );
         // left side
         new JoystickButton(driver,XboxController.Button.kX.value).whenPressed(
-                new EjectOuter(outerEjector)
+                new EjectInnerCommand(innerEjector)
         );
         // right side
         new JoystickButton(driver,XboxController.Button.kA.value).whenPressed(
-                new EjectInner(innerEjector)
+                new EjectOuterCommand(outerEjector)
         );
 
         // Add button to command mappings here.
