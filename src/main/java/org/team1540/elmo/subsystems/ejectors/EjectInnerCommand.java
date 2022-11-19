@@ -11,7 +11,7 @@ public class EjectInnerCommand extends SequentialCommandGroup {
 
         addCommands(
                 new InstantCommand(innerEjector::extend),
-                new WaitDashboardVarCommand(this,"push",0.15), // wait for suction to fully unsucc. // TODO: Test without waiting
+                new WaitDashboardVarCommand(0.15, "extend", this), // wait for extendermabober to start extending
                 new InstantCommand(()->innerEjector.setSuction(false))
         );
     }
