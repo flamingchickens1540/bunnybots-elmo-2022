@@ -2,6 +2,7 @@ package org.team1540.elmo.subsystems.ejectors;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.team1540.elmo.Constants;
 
@@ -14,6 +15,8 @@ public class Ejectors extends SubsystemBase {
         this.suction = suction;
         this.eject = eject;
         SmartDashboard.putNumber(getName() + "/extendSecs",1);
+
+        setDefaultCommand(new ResetEjectorCommand(this).andThen(new RunCommand(()->{}))); // reset ejectors and then wait
     }
 
     public void setSuction(boolean sucking) {
