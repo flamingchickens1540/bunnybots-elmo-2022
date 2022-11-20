@@ -6,6 +6,7 @@ import org.team1540.elmo.utils.WaitDashboardVarCommand;
 
 public class ResetEjectorCommand extends SequentialCommandGroup {
     public ResetEjectorCommand(Ejectors ejector) {
+        addRequirements(ejector);
         addCommands(
                 parallel(
                         new InstantCommand(()->ejector.setExtended(false)),
