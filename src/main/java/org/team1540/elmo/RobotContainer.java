@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+import org.team1540.elmo.subsystems.drivetrain.DriveTrain;
+import org.team1540.elmo.subsystems.drivetrain.TankDrive;
 import org.team1540.elmo.subsystems.ejectors.*;
 
 
@@ -24,6 +27,7 @@ public class RobotContainer
     private final Ejectors.OuterEjector outerEjector = new Ejectors.OuterEjector();
     private final Ejectors.InnerEjector innerEjector = new Ejectors.InnerEjector();
     private final Ejectors.UpperEjector upperEjector = new Ejectors.UpperEjector();
+    private final DriveTrain driveTrain = new DriveTrain();
 
     private XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
 
@@ -64,6 +68,8 @@ public class RobotContainer
                 new ResetEjectorCommand(outerEjector).alongWith(
                 new ResetEjectorCommand(innerEjector)))
         );
+
+        driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));
 
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
