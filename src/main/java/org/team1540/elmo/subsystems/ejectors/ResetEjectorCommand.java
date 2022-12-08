@@ -10,7 +10,8 @@ public class ResetEjectorCommand extends SequentialCommandGroup {
         addCommands(
                 parallel(
                         new InstantCommand(()->ejector.setExtended(false)),
-                        new InstantCommand(()->ejector.setSuction(true))
+                        new InstantCommand(()->ejector.setSuction(false))
+                        // new InstantCommand(()->ejector.setSuction(true))
                 ),
                 new WaitDashboardVarCommand(0.5,"retract",this)
         );
