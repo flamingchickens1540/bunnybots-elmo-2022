@@ -5,7 +5,9 @@
 
 package org.team1540.elmo;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -23,12 +25,16 @@ import org.team1540.elmo.subsystems.ejectors.*;
  */
 public class RobotContainer
 {
-    // The robot's subsystems and commands are defined here...
-    private final Ejectors.OuterEjector outerEjector = new Ejectors.OuterEjector();
-    private final Ejectors.InnerEjector innerEjector = new Ejectors.InnerEjector();
-    private final Ejectors.UpperEjector upperEjector = new Ejectors.UpperEjector();
+    // Subsystem
+    private final Ejector.OuterEjector outerEjector = new Ejector.OuterEjector();
+    private final Ejector.InnerEjector innerEjector = new Ejector.InnerEjector();
+    private final Ejector.UpperEjector upperEjector = new Ejector.UpperEjector();
     private final DriveTrain driveTrain = new DriveTrain();
 
+    // Misc Components
+    private final Compressor compressor = new Compressor(Constants.COMPRESSOR, PneumaticsModuleType.CTREPCM);
+
+    // Control Devices
     private XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -36,8 +42,13 @@ public class RobotContainer
     {
         // Configure the button bindings
         configureButtonBindings();
+        setupMiscComponents();
     }
     
+
+    public void setupMiscComponents() {
+        compressor.enableDigital();
+    }
     
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
