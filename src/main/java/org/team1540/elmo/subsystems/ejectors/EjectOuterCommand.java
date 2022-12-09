@@ -6,7 +6,7 @@ import org.team1540.elmo.utils.WaitDashboardVarCommand;
 
 public class EjectOuterCommand extends SequentialCommandGroup {
 
-    public EjectOuterCommand(Ejectors.OuterEjector outerEjector) {
+    public EjectOuterCommand(Ejector.OuterEjector outerEjector) {
         addRequirements(outerEjector);
 
         addCommands(

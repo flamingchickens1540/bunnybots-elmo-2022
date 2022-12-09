@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.team1540.elmo.Constants;
 
-public class Ejectors extends SubsystemBase {
+public class Ejector extends SubsystemBase {
 
     private final Solenoid suction;
     private final Solenoid eject;
 
-    public Ejectors(Solenoid suction, Solenoid eject) {
+    public Ejector(Solenoid suction, Solenoid eject) {
         this.suction = suction;
         this.eject = eject;
         SmartDashboard.putNumber(getName() + "/extendSecs",1);
@@ -30,7 +30,7 @@ public class Ejectors extends SubsystemBase {
         eject.startPulse();
     }
 
-    public static class InnerEjector extends Ejectors {
+    public static class InnerEjector extends Ejector {
         public InnerEjector() {
             super(
                     new Solenoid(Constants.PNEUMATICS_TYPE,Constants.SUCTION_INNER_CHANNEL),
@@ -38,7 +38,7 @@ public class Ejectors extends SubsystemBase {
             );
         }
     }
-    public static class OuterEjector extends Ejectors {
+    public static class OuterEjector extends Ejector {
         public OuterEjector() {
             super(
                     new Solenoid(Constants.PNEUMATICS_TYPE,Constants.SUCTION_OUTER_CHANNEL),
@@ -46,7 +46,7 @@ public class Ejectors extends SubsystemBase {
             );
         }
     }
-    public static class UpperEjector extends Ejectors {
+    public static class UpperEjector extends Ejector {
         public UpperEjector() {
             super(
                     new Solenoid(Constants.PNEUMATICS_TYPE,Constants.SUCTION_UPPER_CHANNEL),
