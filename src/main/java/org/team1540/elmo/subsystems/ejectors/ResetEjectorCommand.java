@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.team1540.elmo.utils.WaitDashboardVarCommand;
 
 public class ResetEjectorCommand extends SequentialCommandGroup {
-    public ResetEjectorCommand(Ejectors ejector) {
+    public ResetEjectorCommand(Ejector ejector) {
         addRequirements(ejector);
         addCommands(
                 parallel(

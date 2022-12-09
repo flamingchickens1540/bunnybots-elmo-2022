@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 public class EjectAllLowerCommand extends ParallelCommandGroup {
 
-    public EjectAllLowerCommand(Ejectors.InnerEjector innerEjector, Ejectors.OuterEjector outerEjector) {
+    public EjectAllLowerCommand(Ejector.InnerEjector innerEjector, Ejector.OuterEjector outerEjector) {
         addRequirements(innerEjector,outerEjector); // test this
 
         addCommands(

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.team1540.elmo.utils.WaitDashboardVarCommand;
 
 public class EjectUpperCommand extends SequentialCommandGroup {
-    public EjectUpperCommand(Ejectors.UpperEjector upperEjector) {
+    public EjectUpperCommand(Ejector.UpperEjector upperEjector) {
         addCommands(
                 new InstantCommand(upperEjector::extend),
                 new WaitDashboardVarCommand(.3,"extend",this),
