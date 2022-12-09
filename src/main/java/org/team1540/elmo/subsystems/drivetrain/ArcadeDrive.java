@@ -11,6 +11,7 @@ public class ArcadeDrive extends CommandBase {
 
     public ArcadeDrive(DriveTrain driveTrain, XboxController driver) {
         this.driveTrain = driveTrain;
+        this.driver = driver;
 
         addRequirements(driveTrain);
     }
