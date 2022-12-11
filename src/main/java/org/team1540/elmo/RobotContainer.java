@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import org.team1540.elmo.subsystems.drivetrain.DriveTrain;
+import org.team1540.elmo.subsystems.drivetrain.EmergencyBrake;
 import org.team1540.elmo.subsystems.drivetrain.TankDrive;
 import org.team1540.elmo.subsystems.ejectors.*;
 
@@ -80,6 +81,8 @@ public class RobotContainer
                 new ResetEjectorCommand(innerEjector)))
         );
 
+        EmergencyBrake emergencyBrake = new EmergencyBrake(driveTrain);
+        new JoystickButton(driver, XboxController.Button.kRightBumper.value).whenPressed(emergencyBrake);
         driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));
 
         // Add button to command mappings here.
