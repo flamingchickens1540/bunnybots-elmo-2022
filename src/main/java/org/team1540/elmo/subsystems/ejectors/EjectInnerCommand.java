@@ -10,6 +10,7 @@ public class EjectInnerCommand extends SequentialCommandGroup {
         addRequirements(innerEjector);
 
         addCommands(
+                new InstantCommand(()->innerEjector.setSuction(true)),
                 new InstantCommand(innerEjector::extend),
                 new WaitDashboardVarCommand(0.15, "extend", this), // wait for extendermabober to start extending
                 new InstantCommand(()->innerEjector.setSuction(false))

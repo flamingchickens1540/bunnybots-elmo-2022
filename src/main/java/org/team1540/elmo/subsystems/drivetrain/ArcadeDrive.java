@@ -11,6 +11,7 @@ public class ArcadeDrive extends CommandBase {
 
     public ArcadeDrive(DriveTrain driveTrain, XboxController driver) {
         this.driveTrain = driveTrain;
+        this.driver = driver;
 
         addRequirements(driveTrain);
     }
@@ -21,8 +22,8 @@ public class ArcadeDrive extends CommandBase {
         double forwardPercent = driver.getLeftY();
         
 
-        double leftPercent = spinPercent + forwardPercent;
-        double rightPercent = -spinPercent + forwardPercent;
+        double leftPercent = -spinPercent + forwardPercent;
+        double rightPercent = spinPercent + forwardPercent;
 
         // Any calculated output is greater than 1, scale both coefficients down so that the max is 1
         double maxScalarPercent = Math.max(Math.abs(leftPercent),Math.abs(rightPercent));
