@@ -15,7 +15,7 @@ public class Ejector extends SubsystemBase {
         this.eject = eject;
         SmartDashboard.putNumber(getName() + "/extendSecs",1);
 
-        setDefaultCommand(new ResetEjectorCommand(this).andThen(new RunCommand(()->{}))); // reset ejectors and then wait
+        setDefaultCommand(new ResetEjectorAndWaitForeverCommand(this,false)); // reset ejectors and then wait
     }
 
     public void setSuction(boolean sucking) {

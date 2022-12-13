@@ -10,8 +10,15 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.team1540.elmo.subsystems.drivetrain.ArcadeDrive;
 import org.team1540.elmo.subsystems.drivetrain.DriveTrain;
 import org.team1540.elmo.subsystems.drivetrain.EmergencyBrake;
 import org.team1540.elmo.subsystems.drivetrain.TankDrive;
@@ -59,31 +66,37 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-//        new JoystickButton(driver,XboxController.Button.kA.value).whenPressed(
-//                new EjectLower(innerEjector,outerEjector)
-//        );
+        Trigger eitherBumper = new JoystickButton(driver,XboxController.Button.kLeftBumper.value).or(new JoystickButton(driver,XboxController.Button.kRightBumper.value));
+        Trigger neitherBumper = eitherBumper.negate();
+
         // left side
-        new JoystickButton(driver,XboxController.Button.kX.value).whenPressed(
+        new JoystickButton(driver,XboxController.Button.kX.value).and(neitherBumper).whenActive(
                 new EjectInnerCommand(innerEjector)
         );
         // right side
-        new JoystickButton(driver,XboxController.Button.kA.value).whenPressed(
+        new JoystickButton(driver,XboxController.Button.kB.value).and(neitherBumper).whenActive(
                 new EjectOuterCommand(outerEjector)
         );
         // upper
-        new JoystickButton(driver,XboxController.Button.kY.value).whenPressed(
+        new JoystickButton(driver,XboxController.Button.kY.value).and(neitherBumper).whenActive(
                 new EjectUpperCommand(upperEjector)
         );
-        // retract all
-        new JoystickButton(driver,XboxController.Button.kB.value).whenPressed(
-                new ResetEjectorCommand(upperEjector).alongWith(
-                new ResetEjectorCommand(outerEjector).alongWith(
-                new ResetEjectorCommand(innerEjector)))
+
+        // toggle individual suction when either bumper and X:inner / B:outer / Y:upper are pressed
+        new JoystickButton(driver,XboxController.Button.kX.value).and(eitherBumper).toggleWhenActive(
+            new ResetEjectorAndWaitForeverCommand(innerEjector,true)
+        );
+        new JoystickButton(driver,XboxController.Button.kB.value).and(eitherBumper).toggleWhenActive(
+            new ResetEjectorAndWaitForeverCommand(outerEjector,true)
+        );
+        new JoystickButton(driver,XboxController.Button.kY.value).and(eitherBumper).toggleWhenActive(
+            new ResetEjectorAndWaitForeverCommand(upperEjector,true)
         );
 
         EmergencyBrake emergencyBrake = new EmergencyBrake(driveTrain);
         new JoystickButton(driver, XboxController.Button.kRightBumper.value).whenPressed(emergencyBrake);
         driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));
+        // driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, driver));
 
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
