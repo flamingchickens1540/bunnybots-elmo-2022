@@ -22,12 +22,20 @@ public class DriveTrain extends SubsystemBase {
         frontRight.setInverted(false);
         backRight.setInverted(false);
 
+        /*
         frontRight.setNeutralMode(NeutralMode.Brake);
         frontLeft.setNeutralMode(NeutralMode.Brake);
+        */
     }
 
     public void stop() {
         setPercent(0, 0);
+    }
+
+    public void setBrake(boolean brake) {
+        NeutralMode neutralMode = brake ? NeutralMode.Brake : NeutralMode.Coast;
+        frontRight.setNeutralMode(neutralMode);
+        frontLeft.setNeutralMode(neutralMode);
     }
 
     public void setPercent(double leftPercent, double rightPercent) {

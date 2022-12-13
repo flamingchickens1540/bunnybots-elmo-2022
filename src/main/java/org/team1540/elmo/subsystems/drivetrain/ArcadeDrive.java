@@ -21,18 +21,15 @@ public class ArcadeDrive extends CommandBase {
         double spinPercent = driver.getRightX();
         double forwardPercent = driver.getLeftY();
         
+        double totalThrottle = Math.abs(spinPercent) + Math.abs(forwardPercent);
 
-        double leftPercent = -spinPercent + forwardPercent;
-        double rightPercent = spinPercent + forwardPercent;
+        if(totalThrottle > 1) {
+            double coefficient = 1 / totalThrottle;
 
-        // Any calculated output is greater than 1, scale both coefficients down so that the max is 1
-        double maxScalarPercent = Math.max(Math.abs(leftPercent),Math.abs(rightPercent));
-        if(maxScalarPercent > 1) {
-            double coefficient = 1 / maxScalarPercent;
-            leftPercent *= coefficient;
-            rightPercent *= coefficient;
+            spinPercent *= coefficient;
+            forwardPercent *= coefficient;
         }
 
-        driveTrain.setPercent(leftPercent, rightPercent);
+        driveTrain.setPercent(forwardPercent + spinPercent, forwardPercent - spinPercent);
     }
 }

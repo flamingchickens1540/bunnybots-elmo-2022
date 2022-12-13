@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.team1540.elmo.subsystems.drivetrain.ArcadeDrive;
 import org.team1540.elmo.subsystems.drivetrain.DriveTrain;
+import org.team1540.elmo.subsystems.drivetrain.EmergencyBrake;
 import org.team1540.elmo.subsystems.drivetrain.TankDrive;
 import org.team1540.elmo.subsystems.ejectors.*;
 
@@ -92,6 +93,8 @@ public class RobotContainer
             new ResetEjectorAndWaitForeverCommand(upperEjector,true)
         );
 
+        EmergencyBrake emergencyBrake = new EmergencyBrake(driveTrain);
+        new JoystickButton(driver, XboxController.Button.kRightBumper.value).whenPressed(emergencyBrake);
         driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));
         // driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, driver));
 

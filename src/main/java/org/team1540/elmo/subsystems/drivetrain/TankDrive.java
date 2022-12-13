@@ -27,9 +27,8 @@ public class TankDrive extends CommandBase {
     );
 
     public TankDrive(DriveTrain driveTrain, XboxController controller) {
-        addRequirements(driveTrain);
+        addRequirements(this.driveTrain = driveTrain);
         this.controller = controller;
-        this.driveTrain = driveTrain;
 
         SmartDashboard.putNumber(getName() + "/AccelerateLimit",SmartDashboard.getNumber(getName() + "/AccelerateLimit", defaultAccLimit));
         SmartDashboard.putNumber(getName() + "/DecelerateLimit",SmartDashboard.getNumber(getName() + "/DecelerateLimit", defaultDecLimit));
@@ -37,13 +36,16 @@ public class TankDrive extends CommandBase {
 
     @Override
     public void initialize() {
+        double accLimit = SmartDashboard.getNumber(getName() + "/AccelerateLimit", defaultAccLimit);
+        double decLimit = SmartDashboard.getNumber(getName() + "/DecelerateLimit", defaultDecLimit);
+
         leftRateLimiter = new SignedSlewRateLimiter(
-            SmartDashboard.getNumber(getName() + "/AccelerateLimit", defaultAccLimit),
-            SmartDashboard.getNumber(getName() + "/DecelerateLimit", defaultDecLimit)
+            accLimit,
+            decLimit
         );
         rightRateLimiter = new SignedSlewRateLimiter(
-            SmartDashboard.getNumber(getName() + "/AccelerateLimit", defaultAccLimit),
-            SmartDashboard.getNumber(getName() + "/DecelerateLimit", defaultDecLimit)
+            accLimit,
+            decLimit
         );
     }
 
@@ -55,16 +57,14 @@ public class TankDrive extends CommandBase {
     public void execute() {
         double leftJoystickPercent = controller.getLeftY();
         double rightJoystickPercent = controller.getRightY();
-        double leftPercent = Math.abs(leftJoystickPercent) > deadlock ? leftJoystickPercent : 0;
-        double rightPercent = Math.abs(rightJoystickPercent) > deadlock ? rightJoystickPercent : 0;
         // double totalPercent = Math.abs(rightPercent) + Math.abs(leftPercent);
         // // todo: limit ramping to total percent = 1. After that, it should ramp linearly
         // double totalOutputPercent = rateLimiter.calculate(totalPercent);
         // double leftOutputPercent = totalOutputPercent * leftPercent / totalPercent; // proportion of left to total
         // double rightOutputPercent = totalOutputPercent * rightPercent / totalPercent; // proportion of 
 
-        double leftOutPercent = leftRateLimiter.calculate(leftPercent);
-        double rightOutPercent = rightRateLimiter.calculate(rightPercent);
+        double leftOutPercent = leftRateLimiter.calculate(Math.abs(leftJoystickPercent) > deadlock ? leftJoystickPercent : 0);
+        double rightOutPercent = rightRateLimiter.calculate(Math.abs(rightJoystickPercent) > deadlock ? rightJoystickPercent : 0);
 
         driveTrain.setPercent(leftOutPercent,rightOutPercent);
 
