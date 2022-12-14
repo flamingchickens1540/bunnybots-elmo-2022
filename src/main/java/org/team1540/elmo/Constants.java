@@ -40,4 +40,7 @@ public final class Constants {
     public static final int DEPLOY_INNER_CHANNEL = 6;
     // COMPRESSOR
     public static final int COMPRESSOR = 0;
+
+    // INPUT
+    public static final int NAVX_PORT = 0;
 }
