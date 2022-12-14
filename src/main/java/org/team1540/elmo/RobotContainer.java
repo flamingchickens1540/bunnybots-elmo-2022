@@ -11,14 +11,10 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import org.team1540.elmo.subsystems.drivetrain.ArcadeDrive;
+import org.team1540.elmo.subsystems.drivetrain.DriveForwardAndTurn;
 import org.team1540.elmo.subsystems.drivetrain.DriveTrain;
 import org.team1540.elmo.subsystems.drivetrain.TankDrive;
 import org.team1540.elmo.subsystems.ejectors.*;
@@ -68,6 +64,8 @@ public class RobotContainer
         Trigger eitherBumper = new JoystickButton(driver,XboxController.Button.kLeftBumper.value).or(new JoystickButton(driver,XboxController.Button.kRightBumper.value));
         Trigger neitherBumper = eitherBumper.negate();
 
+
+        //////////////////// SUCTION /////////////////////
         // left side
         new JoystickButton(driver,XboxController.Button.kX.value).and(neitherBumper).whenActive(
                 new EjectInnerCommand(innerEjector)
@@ -92,8 +90,26 @@ public class RobotContainer
             new ResetEjectorAndWaitForeverCommand(upperEjector,true)
         );
 
+        //////////////////// AUTO DRIVE /////////////////////
+        Trigger bothBumpers = new JoystickButton(driver,XboxController.Button.kLeftBumper.value).and(new JoystickButton(driver,XboxController.Button.kRightBumper.value));
+        Trigger leftJoy = new JoystickButton(driver,XboxController.Button.kLeftStick.value);
+        Trigger rightJoy = new JoystickButton(driver,XboxController.Button.kRightStick.value);
+        Trigger bothJoys = leftJoy.and(rightJoy);
+        Trigger eitherJoy = leftJoy.or(rightJoy);
+        // reset gyro
+        bothBumpers.whenActive(
+            new InstantCommand(driveTrain::resetGyro)
+        );
+        rightJoy.and(bothJoys.negate()).whileActiveContinuous(
+            new DriveForwardAndTurn(45, .5, .3, driveTrain)
+        );
+        leftJoy.and(bothJoys.negate()).whileActiveContinuous(
+            new DriveForwardAndTurn(0, .5, .3, driveTrain)
+        );
+
         driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));
         // driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, driver));
+
 
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
