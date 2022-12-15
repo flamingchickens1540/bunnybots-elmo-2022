@@ -14,31 +14,44 @@ import edu.wpi.first.util.WPIUtilJNI;
  * edu.wpi.first.math.trajectory.TrapezoidProfile} instead.
  */
 public class SignedSlewRateLimiter {
-  private final double m_rateLimitAcc;
-  private final double m_rateLimitDecc;
+  private double m_rateLimitAcc;
+  private double m_rateLimitDecc;
   private double m_prevVal;
   private double m_prevTime;
 
   /**
    * Creates a new SlewRateLimiter with the given rate limit and initial value.
    *
-   * @param rateLimit The rate-of-change limit, in units per second.
+   * @param rateLimitAcc The rate-of-increase limit, in units per second.
+   * @param rateLimitDec The rate-of-decrease limit, in units per second.
    * @param initialValue The initial value of the input.
    */
-  public SignedSlewRateLimiter(double rateLimitAcc, double rateLimitDecc, double initialValue) {
+  public SignedSlewRateLimiter(double rateLimitAcc, double rateLimitDec, double initialValue) {
     m_rateLimitAcc = rateLimitAcc;
-    m_rateLimitDecc = rateLimitDecc;
+    m_rateLimitDecc = rateLimitDec;
     m_prevVal = initialValue;
     m_prevTime = WPIUtilJNI.now() * 1e-6;
+  }
+
+  public double getPrevVal() {
+    return m_prevVal;
+  }
+
+  public void setAccelerationLimit(double rateLimitAcc) {
+      this.m_rateLimitAcc = rateLimitAcc;
+  }
+  public void setDecelerationLimit(double rateLimitDecc) {
+    this.m_rateLimitDecc = rateLimitDecc;
   }
 
   /**
    * Creates a new SlewRateLimiter with the given rate limit and an initial value of zero.
    *
-   * @param rateLimit The rate-of-change limit, in units per second.
+   * @param rateLimitAcc The rate-of-increase limit, in units per second.
+   * @param rateLimitDec The rate-of-decrease limit, in units per second.
    */
-  public SignedSlewRateLimiter(double rateLimitAcc, double rateLimitDecc) {
-    this(rateLimitAcc, rateLimitDecc, 0);
+  public SignedSlewRateLimiter(double rateLimitAcc, double rateLimitDec) {
+    this(rateLimitAcc, rateLimitDec, 0);
   }
 
   /**
