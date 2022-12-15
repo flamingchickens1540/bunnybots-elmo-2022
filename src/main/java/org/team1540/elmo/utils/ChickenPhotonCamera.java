@@ -16,7 +16,7 @@ public class ChickenPhotonCamera extends PhotonCamera {
     public PhotonTrackedTarget getTargetById(int id) {
         PhotonPipelineResult result = getLatestResult();
         Optional<PhotonTrackedTarget> target = result.getTargets().stream().filter((targ)->targ.getFiducialId() == id).findFirst();
-        return target.get();
+        return target.orElseGet(()->null);
     }
 
 
