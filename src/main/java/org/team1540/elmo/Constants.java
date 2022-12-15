@@ -41,9 +41,6 @@ public final class Constants {
     // COMPRESSOR
     public static final int COMPRESSOR = 0;
 
-    // INPUT
-    public static final int NAVX_PORT = 0;
-
     // APRILTAGS
     public static final int TOWER_APRILTAG_ID = -1;
     public static final String CAMERA_NAME = "";
