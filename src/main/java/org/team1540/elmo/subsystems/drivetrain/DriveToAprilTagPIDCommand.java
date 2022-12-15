@@ -36,7 +36,7 @@ public class DriveToAprilTagPIDCommand extends CommandBase {
         );
         double pitch = target.getPitch();
 
-        double speed = pid.calculate(distance);
+        double speed = -pid.calculate(distance);
         double spin = pitch/180;
 
         driveTrain.setSpeedSpin(speed,spin);
