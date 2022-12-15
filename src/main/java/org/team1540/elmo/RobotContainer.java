@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import org.team1540.elmo.subsystems.drivetrain.Auto;
-import org.team1540.elmo.subsystems.drivetrain.DriveForwardAndTurn;
+import org.team1540.elmo.subsystems.drivetrain.DriveForwardAndTurnCommand;
 import org.team1540.elmo.subsystems.drivetrain.DriveTrain;
 import org.team1540.elmo.subsystems.drivetrain.TankDrive;
 import org.team1540.elmo.subsystems.ejectors.*;
@@ -104,10 +104,10 @@ public class RobotContainer
             new InstantCommand(driveTrain::resetGyro)
         );
         rightJoy.and(bothJoys.negate()).whileActiveContinuous(
-            new DriveForwardAndTurn(45, .5, .3, driveTrain)
+            new DriveForwardAndTurnCommand(45, .5, .3, driveTrain)
         );
         leftJoy.and(bothJoys.negate()).whileActiveContinuous(
-            new DriveForwardAndTurn(0, .5, .3, driveTrain)
+            new DriveForwardAndTurnCommand(0, .5, .3, driveTrain)
         );
 
         driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));

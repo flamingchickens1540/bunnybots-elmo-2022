@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.photonvision.targeting.PhotonTrackedTarget;
 import org.team1540.elmo.utils.ChickenPhotonCamera;
 
-public class DriveToAprilTag extends CommandBase {
+public class DriveToAprilTagCommand extends CommandBase {
 
     private int tagId;
     private double driveSpeedPercent;
@@ -12,7 +12,7 @@ public class DriveToAprilTag extends CommandBase {
     private DriveTrain driveTrain;
     private ChickenPhotonCamera camera;
 
-    public DriveToAprilTag(int tagId, double driveSpeedPercent, double turnSpeedFactor, DriveTrain driveTrain, ChickenPhotonCamera camera) {
+    public DriveToAprilTagCommand(int tagId, double driveSpeedPercent, double turnSpeedFactor, DriveTrain driveTrain, ChickenPhotonCamera camera) {
         this.tagId = tagId;
         this.driveSpeedPercent = driveSpeedPercent;
         this.turnSpeedMaxPercent = turnSpeedFactor;

@@ -4,8 +4,8 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 
-public class DriveForwardAndTurn extends PIDCommand {
-    public DriveForwardAndTurn(double setPoint, double rotationSpeed, double driveSpeed, DriveTrain driveTrain) {
+public class DriveForwardAndTurnCommand extends PIDCommand {
+    public DriveForwardAndTurnCommand(double setPoint, double rotationSpeed, double driveSpeed, DriveTrain driveTrain) {
         super(new PIDController(rotationSpeed, rotationSpeed/7, 0),
             ()->driveTrain.getAngle()%360,
             ()->setPoint,

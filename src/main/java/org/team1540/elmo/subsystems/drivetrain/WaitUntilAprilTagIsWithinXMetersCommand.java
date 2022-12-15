@@ -5,9 +5,9 @@ import org.photonvision.PhotonUtils;
 import org.team1540.elmo.Constants;
 import org.team1540.elmo.utils.ChickenPhotonCamera;
 
-public class WaitUntilAprilTagIsWithinXMeters extends WaitUntilCommand {
+public class WaitUntilAprilTagIsWithinXMetersCommand extends WaitUntilCommand {
 
-    public WaitUntilAprilTagIsWithinXMeters(int apriltagId, double meters, ChickenPhotonCamera camera) {
+    public WaitUntilAprilTagIsWithinXMetersCommand(int apriltagId, double meters, ChickenPhotonCamera camera) {
         super(() ->
                 camera.getTargetById(apriltagId) != null
              && PhotonUtils.calculateDistanceToTargetMeters(
