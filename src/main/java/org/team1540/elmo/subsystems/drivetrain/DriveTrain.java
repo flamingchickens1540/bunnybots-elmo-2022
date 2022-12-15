@@ -48,7 +48,8 @@ public class DriveTrain extends SubsystemBase {
 
     ///////////// RAMPING ////////////
     private enum DriveRampingMode {
-        NO_RAMP,
+        NO_RAMP_SS_SET, // no ramping but spin speed ratelimiters are reset
+        NO_RAMP_D_SET, // no ramping but differential ratelimiters are reset
         SPEED_SPIN,
         DIFFERENTIAL,
     }
@@ -75,7 +76,7 @@ public class DriveTrain extends SubsystemBase {
         setPercentRaw(leftPercent, rightPercent);
 
         // ramping
-        driveRampingMode = DriveRampingMode.NO_RAMP;
+        driveRampingMode = DriveRampingMode.NO_RAMP_D_SET;
         leftRateLimiter.reset(leftPercent);
         rightRateLimiter.reset(rightPercent);
     }
@@ -96,7 +97,7 @@ public class DriveTrain extends SubsystemBase {
 
     public void setPercentRamped(double leftPercent, double rightPercent) {
         // if setting right after using speed-spin ramped mode, translate units
-        if(driveRampingMode.equals(DriveRampingMode.SPEED_SPIN)) {
+        if(driveRampingMode.equals(DriveRampingMode.SPEED_SPIN) || driveRampingMode.equals(DriveRampingMode.NO_RAMP_SS_SET)) {
             double left = speedRateLimiter.getPrevVal() + spinRateLimiter.getPrevVal()/2;
             double right = speedRateLimiter.getPrevVal() - spinRateLimiter.getPrevVal()/2;
             leftRateLimiter.reset(left);
@@ -147,7 +148,7 @@ public class DriveTrain extends SubsystemBase {
         setSpeedSpinRaw(processed.x,processed.y);
 
         // ramping
-        driveRampingMode = DriveRampingMode.NO_RAMP;
+        driveRampingMode = DriveRampingMode.NO_RAMP_SS_SET;
         speedRateLimiter.reset(speedPercent);
         spinRateLimiter.reset(spinPercent);
     }
@@ -170,7 +171,7 @@ public class DriveTrain extends SubsystemBase {
 
     public void setSpeedAndSpinRamped(double speedPercent, double spinPercent) {
         // if setting right after using differential ramped mode, translate units
-        if(driveRampingMode.equals(DriveRampingMode.DIFFERENTIAL)) {
+        if(driveRampingMode.equals(DriveRampingMode.DIFFERENTIAL) || driveRampingMode.equals(DriveRampingMode.NO_RAMP_D_SET)) {
             double speed = (leftRateLimiter.getPrevVal() + rightRateLimiter.getPrevVal()) / 2;
             double spin = (leftRateLimiter.getPrevVal() - speed) * 2;
             speedRateLimiter.reset(speed);
