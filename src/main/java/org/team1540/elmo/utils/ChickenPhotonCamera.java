@@ -18,6 +18,4 @@ public class ChickenPhotonCamera extends PhotonCamera {
         Optional<PhotonTrackedTarget> target = result.getTargets().stream().filter((targ)->targ.getFiducialId() == id).findFirst();
         return target.orElseGet(()->null);
     }
-
-
 }
