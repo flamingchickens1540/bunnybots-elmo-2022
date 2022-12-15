@@ -12,7 +12,7 @@ import org.team1540.elmo.subsystems.ejectors.Ejector;
 import org.team1540.elmo.utils.ChickenPhotonCamera;
 
 public class Auto extends SequentialCommandGroup {
-    public Auto(DriveTrain driveTrain, ChickenPhotonCamera camera, Ejector.UpperEjector upperEjector, Ejector.OuterEjector outerEjector, Ejector.InnerEjector innerEjector) {
+    public Auto(DriveTrain driveTrain, Ejector.UpperEjector upperEjector, Ejector.OuterEjector outerEjector, Ejector.InnerEjector innerEjector, ChickenPhotonCamera camera) {
         super(
                 // drive forward until can see april tag
                 deadline(
