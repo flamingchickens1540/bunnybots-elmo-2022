@@ -14,10 +14,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
+import org.team1540.elmo.subsystems.drivetrain.Auto;
 import org.team1540.elmo.subsystems.drivetrain.DriveForwardAndTurn;
 import org.team1540.elmo.subsystems.drivetrain.DriveTrain;
 import org.team1540.elmo.subsystems.drivetrain.TankDrive;
 import org.team1540.elmo.subsystems.ejectors.*;
+import org.team1540.elmo.utils.ChickenPhotonCamera;
 
 
 /**
@@ -36,6 +38,7 @@ public class RobotContainer
 
     // Misc Components
     private final Compressor compressor = new Compressor(Constants.COMPRESSOR, PneumaticsModuleType.CTREPCM);
+    private final ChickenPhotonCamera camera = new ChickenPhotonCamera(Constants.CAMERA_NAME);
 
     // Control Devices
     private XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
@@ -124,6 +127,6 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         // An ExampleCommand will run in autonomous
-        return null;
+        return new Auto(driveTrain,upperEjector,outerEjector,innerEjector,camera);
     }
 }

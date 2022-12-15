@@ -46,6 +46,7 @@ public final class Constants {
 
     // APRILTAGS
     public static final int TOWER_APRILTAG_ID = -1;
+    public static final String CAMERA_NAME = "";
 
     // SELF MEASUREMENTS
     public static final double CAMERA_HEIGHT_METERS = 2;
