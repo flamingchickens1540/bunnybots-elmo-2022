@@ -42,8 +42,8 @@ public final class Constants {
     public static final int COMPRESSOR = 0;
 
     // APRILTAGS
-    public static final int TOWER_APRILTAG_ID = -1;
-    public static final String CAMERA_NAME = "";
+    public static final int TOWER_APRILTAG_ID = 15;
+    public static final String CAMERA_NAME = "photonvision";
 
     // SELF MEASUREMENTS
     public static final double CAMERA_HEIGHT_METERS = 2;

@@ -26,7 +26,11 @@ public class Ejector extends SubsystemBase {
         eject.set(extended);
     }
     public void extend() {
-        eject.setPulseDuration(SmartDashboard.getNumber(getName() + "/extendSecs",1));
+        extend(0.4);
+//        extend(SmartDashboard.getNumber(getName() + "/extendSecs",1));
+    }
+    public void extend(double seconds) {
+        eject.setPulseDuration(seconds);
         eject.startPulse();
     }
 

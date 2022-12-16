@@ -14,10 +14,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-import org.team1540.elmo.subsystems.drivetrain.Auto;
-import org.team1540.elmo.subsystems.drivetrain.DriveForwardAndTurnCommand;
-import org.team1540.elmo.subsystems.drivetrain.DriveTrain;
-import org.team1540.elmo.subsystems.drivetrain.TankDrive;
+import org.team1540.elmo.subsystems.drivetrain.*;
 import org.team1540.elmo.subsystems.ejectors.*;
 import org.team1540.elmo.utils.ChickenPhotonCamera;
 
@@ -81,6 +78,9 @@ public class RobotContainer
         new JoystickButton(driver,XboxController.Button.kY.value).and(neitherBumper).whenActive(
                 new EjectUpperCommand(upperEjector)
         );
+        new JoystickButton(driver,XboxController.Button.kY.value).and(neitherBumper).whileActiveOnce(
+                new DriveToAprilTagPIDCommand(Constants.TOWER_APRILTAG_ID,0.1,driveTrain,camera)
+        );
 
         // toggle individual suction when either bumper and X:inner / B:outer / Y:upper are pressed
         new JoystickButton(driver,XboxController.Button.kX.value).and(eitherBumper).toggleWhenActive(
@@ -110,8 +110,8 @@ public class RobotContainer
             new DriveForwardAndTurnCommand(0, .5, .3, driveTrain)
         );
 
-        driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));
-        // driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, driver));
+//        driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));
+         driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, driver));
 
 
         // Add button to command mappings here.
