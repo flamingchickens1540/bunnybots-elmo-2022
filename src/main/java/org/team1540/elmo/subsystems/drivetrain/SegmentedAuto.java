@@ -10,8 +10,8 @@ import org.team1540.elmo.subsystems.ejectors.EjectUpperCommand;
 import org.team1540.elmo.subsystems.ejectors.Ejector;
 import org.team1540.elmo.utils.ChickenPhotonCamera;
 
-public class Auto extends SequentialCommandGroup {
-    public Auto(DriveTrain driveTrain, Ejector.UpperEjector upperEjector, Ejector.OuterEjector outerEjector, Ejector.InnerEjector innerEjector, ChickenPhotonCamera camera) {
+public class SegmentedAuto extends SequentialCommandGroup {
+    public SegmentedAuto(DriveTrain driveTrain, Ejector.UpperEjector upperEjector, Ejector.OuterEjector outerEjector, Ejector.InnerEjector innerEjector, ChickenPhotonCamera camera) {
         super(
                 // drive forward until can see april tag
                 deadline(
@@ -20,8 +20,13 @@ public class Auto extends SequentialCommandGroup {
                 ),
                 // drive fast (w/ ramping) pointing to tag until close to april tag
                 deadline(
-                        new WaitUntilAprilTagIsWithinXMetersCommand(Constants.TOWER_APRILTAG_ID,0.4,camera),
-                        new DriveToAprilTagPIDCommand(Constants.TOWER_APRILTAG_ID,0.1,driveTrain,camera)
+                        new WaitUntilAprilTagIsWithinXMetersCommand(Constants.TOWER_APRILTAG_ID,2,camera),
+                        new DriveToAprilTagCommand(Constants.TOWER_APRILTAG_ID,0.7,1,driveTrain,camera)
+                ),
+                // drive slow (w/ ramping) pointing to tag until very close to april tag
+                deadline(
+                        new WaitUntilAprilTagIsWithinXMetersCommand(Constants.TOWER_APRILTAG_ID,0.1,camera),
+                        new DriveToAprilTagCommand(Constants.TOWER_APRILTAG_ID,0.1,1,driveTrain,camera)
                 ),
                 // drive forward slowly for last few seconds
                 deadline(
@@ -30,12 +35,14 @@ public class Auto extends SequentialCommandGroup {
                 ),
                 // stop drivetrain (right now no ramping, possibly add ramping?)
                 new InstantCommand(driveTrain::stop,driveTrain),
-                // eject all the tubes!
+                // eject all tubes!
                 parallel(
                         new EjectUpperCommand(upperEjector),
                         new EjectInnerCommand(innerEjector),
                         new EjectOuterCommand(outerEjector)
                 ),
+                // wait for tubes to fully eject
+                new WaitCommand(2),
                 // back up from the tower for a few seconds to give better position for driver to take over
                 deadline(
                         new DriveForwardRampedForeverCommand(-0.3,driveTrain),

@@ -63,12 +63,13 @@ public class TankDrive extends CommandBase {
         // double leftOutputPercent = totalOutputPercent * leftPercent / totalPercent; // proportion of left to total
         // double rightOutputPercent = totalOutputPercent * rightPercent / totalPercent; // proportion of 
 
-        double leftOutPercent = leftRateLimiter.calculate(leftPercent);
-        double rightOutPercent = rightRateLimiter.calculate(rightPercent);
+//        double leftOutPercent = leftRateLimiter.calculate(leftPercent);
+//        double rightOutPercent = rightRateLimiter.calculate(rightPercent);
+//        driveTrain.setPercentRamped(leftOutPercent,rightOutPercent);
+//        SmartDashboard.putNumber(getName()+"/leftPercent", leftOutPercent);
+//        SmartDashboard.putNumber(getName()+"/rightPercent", rightOutPercent);
 
-        driveTrain.setPercent(leftOutPercent,rightOutPercent);
+        driveTrain.setPercentRamped(leftPercent,rightPercent);
 
-        SmartDashboard.putNumber(getName()+"/leftPercent", leftOutPercent);
-        SmartDashboard.putNumber(getName()+"/rightPercent", rightOutPercent);
     }
 }

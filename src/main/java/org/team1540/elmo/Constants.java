@@ -43,7 +43,7 @@ public final class Constants {
 
     // APRILTAGS
     public static final int TOWER_APRILTAG_ID = 15;
-    public static final String CAMERA_NAME = "photonvision";
+    public static final String CAMERA_NAME = "Microsoft_LifeCam_HD-3000";
 
     // SELF MEASUREMENTS
     public static final double CAMERA_HEIGHT_METERS = 2;

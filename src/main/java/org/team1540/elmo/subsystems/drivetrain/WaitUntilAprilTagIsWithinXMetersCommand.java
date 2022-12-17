@@ -14,7 +14,14 @@ public class WaitUntilAprilTagIsWithinXMetersCommand extends WaitUntilCommand {
                 Constants.CAMERA_HEIGHT_METERS,
                 Constants.TARGET_HEIGHT_METERS,
                 Constants.CAMERA_PITCH_RADIANS,
-                camera.getTargetById(apriltagId).getPitch()
-        ) < meters);
+                camera.getTargetById(apriltagId).getPitch()) < meters
+        );
+
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        System.out.println("ENDED!");
+        super.end(interrupted);
     }
 }

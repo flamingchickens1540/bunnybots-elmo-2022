@@ -25,7 +25,7 @@ public class ArcadeDrive extends CommandBase {
 
     @Override
     public void execute() {
-        double spinPercent = -driver.getLeftX();
+        double spinPercent = -driver.getLeftX()/1.8;
         double forwardPercent = driver.getLeftY();
 
         // all shit handled in drivetrain functions

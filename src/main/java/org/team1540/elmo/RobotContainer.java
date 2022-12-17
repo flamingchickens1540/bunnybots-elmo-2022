@@ -66,30 +66,28 @@ public class RobotContainer
 
 
         //////////////////// SUCTION /////////////////////
+        ///// Eject /////
         // left side
-        new JoystickButton(driver,XboxController.Button.kX.value).and(neitherBumper).whenActive(
+        new JoystickButton(driver,XboxController.Button.kX.value).and(eitherBumper).whenActive(
                 new EjectInnerCommand(innerEjector)
         );
         // right side
-        new JoystickButton(driver,XboxController.Button.kB.value).and(neitherBumper).whenActive(
+        new JoystickButton(driver,XboxController.Button.kB.value).and(eitherBumper).whenActive(
                 new EjectOuterCommand(outerEjector)
         );
         // upper
-        new JoystickButton(driver,XboxController.Button.kY.value).and(neitherBumper).whenActive(
+        new JoystickButton(driver,XboxController.Button.kY.value).and(eitherBumper).whenActive(
                 new EjectUpperCommand(upperEjector)
-        );
-        new JoystickButton(driver,XboxController.Button.kY.value).and(neitherBumper).whileActiveOnce(
-                new DriveToAprilTagPIDCommand(Constants.TOWER_APRILTAG_ID,0.1,driveTrain,camera)
         );
 
         // toggle individual suction when either bumper and X:inner / B:outer / Y:upper are pressed
-        new JoystickButton(driver,XboxController.Button.kX.value).and(eitherBumper).toggleWhenActive(
+        new JoystickButton(driver,XboxController.Button.kX.value).and(neitherBumper).toggleWhenActive(
             new ResetEjectorAndWaitForeverCommand(innerEjector,true)
         );
-        new JoystickButton(driver,XboxController.Button.kB.value).and(eitherBumper).toggleWhenActive(
+        new JoystickButton(driver,XboxController.Button.kB.value).and(neitherBumper).toggleWhenActive(
             new ResetEjectorAndWaitForeverCommand(outerEjector,true)
         );
-        new JoystickButton(driver,XboxController.Button.kY.value).and(eitherBumper).toggleWhenActive(
+        new JoystickButton(driver,XboxController.Button.kY.value).and(neitherBumper).toggleWhenActive(
             new ResetEjectorAndWaitForeverCommand(upperEjector,true)
         );
 
@@ -111,7 +109,16 @@ public class RobotContainer
         );
 
 //        driveTrain.setDefaultCommand(new TankDrive(driveTrain, driver));
+//        driveTrain.setDefaultCommand(new BobaTankDrive(driveTrain, driver));
          driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, driver));
+
+//        new JoystickButton(driver,XboxController.Button.kA.value).whileActiveOnce(
+//                new DriveToAprilTagPIDCommand(Constants.TOWER_APRILTAG_ID,0.1,driveTrain,camera)
+//        );
+        new JoystickButton(driver,XboxController.Button.kA.value).toggleWhenPressed(
+                new SegmentedAuto(driveTrain,upperEjector,outerEjector,innerEjector,camera)
+        );
+
 
 
         // Add button to command mappings here.
@@ -127,6 +134,6 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         // An ExampleCommand will run in autonomous
-        return new Auto(driveTrain,upperEjector,outerEjector,innerEjector,camera);
+        return new SegmentedAuto(driveTrain,upperEjector,outerEjector,innerEjector,camera);
     }
 }

@@ -86,7 +86,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     ///////////////// Differential Drive Mode Ramping /////////////////
-    private final double defaultAccLimit = 5;
+    private final double defaultAccLimit = 4;
     private final double defaultDecLimit = 3;
     private double leftRampedSetpoint = 0;
     private double rightRampedSetpoint = 0;
