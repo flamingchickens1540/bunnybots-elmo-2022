@@ -40,4 +40,13 @@ public final class Constants {
     public static final int DEPLOY_INNER_CHANNEL = 6;
     // COMPRESSOR
     public static final int COMPRESSOR = 0;
+
+    // APRILTAGS
+    public static final int TOWER_APRILTAG_ID = 15;
+    public static final String CAMERA_NAME = "Microsoft_LifeCam_HD-3000";
+
+    // SELF MEASUREMENTS
+    public static final double CAMERA_HEIGHT_METERS = 2;
+    public static final double CAMERA_PITCH_RADIANS = 0; // from the horizontal plane >0=up
+    public static final double TARGET_HEIGHT_METERS = 2;
 }
